@@ -12,6 +12,40 @@ const App = () => {
   return (
     <div className="App">
       <h1>TensorFlow Tests</h1>
+      <div className="result-diagram">
+        {!isAnalyzing && (
+          <>
+            <div className="col" style={{ borderRight: "1px solid" }}>
+              <div className="graphic">
+                <div
+                  className="colorbar"
+                  style={{ height: `${result[0]?.result[0] * 100}%` }}
+                />
+              </div>
+              <div className="label">Intent to buy</div>
+            </div>
+            <div className="col">
+              <div className="graphic">
+                <div
+                  className="colorbar"
+                  style={{ height: `${result[0]?.result[1] * 100}%` }}
+                />
+              </div>
+              <div className="label">No intention</div>
+            </div>
+          </>
+        )}
+        {isAnalyzing && (
+          <div className="loading">
+            <span>Analyzing...</span>
+          </div>
+        )}
+        {analyzeError && (
+          <div className="loading">
+            <span>{analyzeError}</span>
+          </div>
+        )}
+      </div>
       <form onSubmit={handleAnalyze}>
         <input
           type="text"
