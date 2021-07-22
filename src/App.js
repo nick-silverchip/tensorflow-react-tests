@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import useTensorFlow from "./hooks/useTensorFlow";
-import commentTraining from "./constants/comment-training";
-import commentTesting from "./constants/comment-testing";
+import commentTraining from "./constants/index";
 
 const App = () => {
   const { analyze, isAnalyzing, analyzeError, result } =

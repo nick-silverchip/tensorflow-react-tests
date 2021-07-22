@@ -3,6 +3,7 @@ import * as tf from "@tensorflow/tfjs";
 import * as use from "@tensorflow-models/universal-sentence-encoder";
 
 const useTensorFlow = (trainingData) => {
+  console.dir(trainingData);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analyzeError, setAnalyseError] = useState(null);
   const [result, setResult] = useState([]);
