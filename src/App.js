@@ -6,7 +6,7 @@ import trainingData from "./constants/";
 const App = () => {
   const { analyze, isAnalyzing, analyzeError, result } =
     useTensorFlow(trainingData);
-  const [textInput, setTextInput] = useState("whats for lunch");
+  const [textInput, setTextInput] = useState("");
 
   return (
     <div className="App">
