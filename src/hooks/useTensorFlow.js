@@ -3,7 +3,6 @@ import * as tf from "@tensorflow/tfjs";
 import * as use from "@tensorflow-models/universal-sentence-encoder";
 
 const useTensorFlow = (trainingData) => {
-  console.dir(trainingData);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analyzeError, setAnalyseError] = useState(null);
   const [result, setResult] = useState([]);
@@ -14,21 +13,21 @@ const useTensorFlow = (trainingData) => {
     tf.layers.dense({
       inputShape: [512],
       activation: "sigmoid",
-      units: 2,
+      units: 4,
     })
   );
   model.add(
     tf.layers.dense({
       inputShape: [2],
       activation: "sigmoid",
-      units: 2,
+      units: 4,
     })
   );
   model.add(
     tf.layers.dense({
       inputShape: [2],
       activation: "sigmoid",
-      units: 2,
+      units: 4,
     })
   );
   // Compile the model
@@ -53,8 +52,10 @@ const useTensorFlow = (trainingData) => {
 
   const outputData = tf.tensor2d(
     trainingData.map((datum) => [
-      datum.intent === "buy" ? 1 : 0,
-      datum.intent === "none" ? 1 : 0,
+      datum.intent === "food" ? 1 : 0,
+      datum.intent === "joke" ? 1 : 0,
+      datum.intent === "question" ? 1 : 0,
+      datum.intent === "compliment" ? 1 : 0,
     ])
   ); // Output: [1,0] or [0,1]
 

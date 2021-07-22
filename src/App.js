@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./App.css";
 import useTensorFlow from "./hooks/useTensorFlow";
-import commentTraining from "./constants/index";
+import trainingData from "./constants/";
 
 const App = () => {
   const { analyze, isAnalyzing, analyzeError, result } =
-    useTensorFlow(commentTraining);
-  const [textInput, setTextInput] = useState("");
+    useTensorFlow(trainingData);
+  const [textInput, setTextInput] = useState("whats for lunch");
 
   return (
     <div className="App">
@@ -21,7 +21,7 @@ const App = () => {
                   style={{ height: `${result[0]?.result[0] * 100}%` }}
                 />
               </div>
-              <div className="label">Intent to buy</div>
+              <div className="label">Food</div>
               <div className="label">{`${(result[0]?.result[0] * 100).toFixed(
                 1
               )}%`}</div>
@@ -33,8 +33,32 @@ const App = () => {
                   style={{ height: `${result[0]?.result[1] * 100}%` }}
                 />
               </div>
-              <div className="label">No intention</div>
+              <div className="label">Joke</div>
               <div className="label">{`${(result[0]?.result[1] * 100).toFixed(
+                1
+              )}%`}</div>
+            </div>
+            <div className="col" style={{ borderRight: "1px solid" }}>
+              <div className="graphic">
+                <div
+                  className="colorbar"
+                  style={{ height: `${result[0]?.result[2] * 100}%` }}
+                />
+              </div>
+              <div className="label">Question</div>
+              <div className="label">{`${(result[0]?.result[2] * 100).toFixed(
+                1
+              )}%`}</div>
+            </div>
+            <div className="col">
+              <div className="graphic">
+                <div
+                  className="colorbar"
+                  style={{ height: `${result[0]?.result[3] * 100}%` }}
+                />
+              </div>
+              <div className="label">Compliment</div>
+              <div className="label">{`${(result[0]?.result[3] * 100).toFixed(
                 1
               )}%`}</div>
             </div>
