@@ -9,8 +9,6 @@ const comments = {
     return { text, intent: "buy" };
   }),
 };
-
 const commentsTraining = [...comments.buy, ...comments.none];
-console.log(commentsTraining);
 
 export default commentsTraining;
