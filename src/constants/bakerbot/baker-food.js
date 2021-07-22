@@ -25,6 +25,9 @@ const foodTraining = [
   "tasty",
   "healthy",
   "whats for lunch",
+  "whats for lunch mark?",
+  "what food should i get?",
+  "what should i have for lunch?",
 ];
 
 export default foodTraining;

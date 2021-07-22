@@ -18,14 +18,14 @@ const useTensorFlow = (trainingData) => {
   );
   model.add(
     tf.layers.dense({
-      inputShape: [2],
+      inputShape: [4],
       activation: "sigmoid",
       units: 4,
     })
   );
   model.add(
     tf.layers.dense({
-      inputShape: [2],
+      inputShape: [4],
       activation: "sigmoid",
       units: 4,
     })
