@@ -74,8 +74,15 @@ const useTensorFlow = (trainingData) => {
           .then((data) => {
             console.log("Success");
             console.log({ data });
+            const formattedData = testingData.map((datum, i) => {
+              return {
+                ...datum,
+                result: data[i],
+              };
+            });
+            console.log({ formattedData });
             setIsAnalyzing(false);
-            setResult(data);
+            setResult(formattedData);
           })
           .catch((error) => {
             console.log("Error");
