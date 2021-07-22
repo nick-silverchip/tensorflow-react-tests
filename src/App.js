@@ -23,6 +23,9 @@ const App = () => {
                 />
               </div>
               <div className="label">Intent to buy</div>
+              <div className="label">{`${(result[0]?.result[0] * 100).toFixed(
+                1
+              )}%`}</div>
             </div>
             <div className="col">
               <div className="graphic">
@@ -32,6 +35,9 @@ const App = () => {
                 />
               </div>
               <div className="label">No intention</div>
+              <div className="label">{`${(result[0]?.result[1] * 100).toFixed(
+                1
+              )}%`}</div>
             </div>
           </>
         )}

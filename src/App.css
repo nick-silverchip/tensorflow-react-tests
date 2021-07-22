@@ -21,7 +21,7 @@ body {
 }
 
 .result-diagram {
-  min-height: 200px;
+  min-height: 400px;
   display: flex;
 }
 .result-diagram .col {
@@ -37,6 +37,7 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   transition: all 0.2s ease;
+  margin-bottom: 1rem;
 }
 .result-diagram .colorbar {
   width: 60px;
