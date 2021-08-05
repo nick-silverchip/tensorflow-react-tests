@@ -1,12 +1,11 @@
-import { useState } from "react";
 import "./App.css";
 import useTensorFlow from "./hooks/useTensorFlow";
 import commentTraining from "./constants/index";
+import SearchForm from "./SearchForm";
 
 const App = () => {
   const { analyze, isAnalyzing, analyzeError, result } =
     useTensorFlow(commentTraining);
-  const [textInput, setTextInput] = useState("");
 
   return (
     <div className="App">
@@ -22,9 +21,11 @@ const App = () => {
                 />
               </div>
               <div className="label">Intent to buy</div>
-              <div className="label">{`${(result[0]?.result[0] * 100).toFixed(
-                1
-              )}%`}</div>
+              <div className="label">{`${
+                !!result[0]?.result[0]
+                  ? (result[0]?.result[0] * 100).toFixed(1)
+                  : 0
+              }%`}</div>
             </div>
             <div className="col">
               <div className="graphic">
@@ -34,9 +35,11 @@ const App = () => {
                 />
               </div>
               <div className="label">No intention</div>
-              <div className="label">{`${(result[0]?.result[1] * 100).toFixed(
-                1
-              )}%`}</div>
+              <div className="label">{`${
+                !!result[0]?.result[1]
+                  ? (result[0]?.result[1] * 100).toFixed(1)
+                  : 0
+              }%`}</div>
             </div>
           </>
         )}
@@ -51,20 +54,12 @@ const App = () => {
           </div>
         )}
       </div>
-      <form onSubmit={handleAnalyze}>
-        <input
-          type="text"
-          value={textInput}
-          onChange={({ target: { value } }) => setTextInput(value)}
-        />
-        <button>Analyse</button>
-      </form>
+      <SearchForm handleSubmit={handleAnalyze} />
     </div>
   );
 
-  function handleAnalyze(e) {
-    e.preventDefault();
-    analyze([{ text: textInput }]);
+  function handleAnalyze(text) {
+    analyze([{ text }]);
   }
 };
 
