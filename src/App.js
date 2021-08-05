@@ -1,12 +1,11 @@
-import { useState } from "react";
 import "./App.css";
 import useTensorFlow from "./hooks/useTensorFlow";
 import trainingData from "./constants/";
+import SearchForm from "./SearchForm";
 
 const App = () => {
   const { analyze, isAnalyzing, analyzeError, result } =
     useTensorFlow(trainingData);
-  const [textInput, setTextInput] = useState("");
 
   return (
     <div className="App">
@@ -83,20 +82,12 @@ const App = () => {
           </div>
         )}
       </div>
-      <form onSubmit={handleAnalyze}>
-        <input
-          type="text"
-          value={textInput}
-          onChange={({ target: { value } }) => setTextInput(value)}
-        />
-        <button>Analyse</button>
-      </form>
+      <SearchForm handleSubmit={handleAnalyze} />
     </div>
   );
 
-  function handleAnalyze(e) {
-    e.preventDefault();
-    analyze([{ text: textInput }]);
+  function handleAnalyze(text) {
+    analyze([{ text }]);
   }
 };
 
