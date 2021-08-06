@@ -57,41 +57,38 @@ const useTensorFlow = (trainingData) => {
     ])
   ); // Output: [1,0] or [0,1]
 
-  const analyze = (testingData) => {
+  const analyze = async (testingData) => {
     console.log("Analyzing...");
+
     setIsAnalyzing(true);
     setAnalyseError(null);
 
-    Promise.all([encodeData(trainingData), encodeData(testingData)])
-      .then((data) => {
-        const { 0: training_data, 1: testing_data } = data;
-        return model
-          .fit(training_data, outputData, { epochs: 200 })
-          .then((history) => {
-            return model.predict(testing_data).array();
-            // model.predict(testing_data).print();
-          })
-          .then((data) => {
-            console.log("Success");
-            console.log({ data });
-            const formattedData = testingData.map((datum, i) => {
-              return {
-                ...datum,
-                result: data[i],
-              };
-            });
-            console.log({ formattedData });
-            setIsAnalyzing(false);
-            setResult(formattedData);
-          })
-          .catch((error) => {
-            console.log("Error");
-            console.error({ error });
-            setIsAnalyzing(false);
-            setAnalyseError(error);
-          });
-      })
-      .catch((err) => console.log("Prom Err:", err));
+    try {
+      const training_data = await encodeData(trainingData);
+      const testing_data = await encodeData(testingData);
+
+      await model.fit(training_data, outputData, { epochs: 200 });
+
+      const data = await model.predict(testing_data).array();
+      console.log("Success");
+      console.log({ data });
+
+      const formattedData = testingData.map((datum, i) => {
+        return {
+          ...datum,
+          result: data[i],
+        };
+      });
+      console.log({ formattedData });
+
+      setIsAnalyzing(false);
+      setResult(formattedData);
+    } catch (err) {
+      console.log("Catch Err:", err);
+
+      setIsAnalyzing(false);
+      setAnalyseError(err);
+    }
   };
 
   return { analyze, isAnalyzing, analyzeError, result };
